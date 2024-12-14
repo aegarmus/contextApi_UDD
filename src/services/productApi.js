@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL_BASE = "https://fakestoreapi.com";
+const URL_BASE = "http://localhost:3000/api/v1";
 
 const apiProductsClients = axios.create({
     baseURL: URL_BASE
@@ -9,7 +9,7 @@ const apiProductsClients = axios.create({
 
 export const getAllProducts = async () => {
     try {
-        const { data } = await apiProductsClients.get('/products')
+        const { data } = await apiProductsClients.get('/product')
         return data
     } catch (error) {
         console.error(error)

@@ -1,0 +1,186 @@
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0d1b2a; 
+    padding: 1rem 2rem; 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 70px; 
+}
+
+.navbar__logo a {
+    color: #ffffff;
+    font-size: 1.8rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: box-shadow 0.3s ease;
+}
+
+.navbar__logo a:hover {
+    box-shadow: 0 4px 0 0 #ffffff;
+}
+
+.navbar__nav {
+    display: flex;
+    flex-grow: 1; 
+    justify-content: center; 
+}
+
+.navbar__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar__item {
+    margin: 0 1rem; 
+}
+
+.navbar__link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.navbar__link:hover {
+    text-shadow: 0 0 15px #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar__user-section {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__login-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.navbar__login-link:hover {
+    box-shadow: 0 4px 0 0 #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar__user-info {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.75rem;
+    border: 2px solid #ffffff;
+
+    transition: .3s;
+}
+
+.navbar__avatar:hover {
+    box-shadow: 0 0 15px #fff;
+    transform: scale(1.2);
+}
+
+.navbar__username {
+    color: #ffffff;
+    margin-right: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.navbar__logout-button {
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    padding: 0.4rem 1rem; 
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar__logout-button:hover {
+    background-color: #ffffff;
+    color: #0d1b2a;
+}
+
+.navbar__toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.navbar__toggle-bar {
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar__nav {
+        position: absolute;
+        top: 70px; 
+        left: 0;
+        width: 100%;
+        background-color: #0d1b2a;
+        flex-direction: column;
+        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .navbar__nav--active {
+        max-height: 500px; 
+    }
+
+    .navbar__list {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .navbar__item {
+        margin: 1rem 0;
+    }
+
+    .navbar__toggle {
+        display: flex;
+    }
+
+    .navbar__user-section {
+        flex-direction: column;
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    .navbar__user-info {
+        flex-direction: column;
+    }
+
+    .navbar__username {
+        margin: 0.5rem 0;
+    }
+
+    .navbar__logout-button {
+        width: 100%;
+    }
+}
+

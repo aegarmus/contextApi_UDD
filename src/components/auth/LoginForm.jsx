@@ -1,72 +1,63 @@
-import { useState, useContext } from "react"
-import { AuthContext } from "../../context/User/userContext"
-import { useNavigate } from "react-router-dom";
-
-
-
+// src/pages/LoginPage.jsx
+import { useState, useContext } from 'react';
+import { AuthContext } from '../../context/User/userContext';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginForm = () => {
-    const { login } = useContext(AuthContext);
-    const navigate = useNavigate()
-    const [ credentials, setCredentials ] = useState({
-        email: "",
-        password: ""
-    });
+    const { login, loginWithGoogle } = useContext(AuthContext);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
-    const [ error, setError ] = useState("")
-
-
-    const handleChange = (event) => {
-        setCredentials({
-            ...credentials,
-            [event.target.name]: event.target.value
-        })
-    }
-
-    const handleSubmit = async(event) => {
-        event.preventDefault()
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError(null);
 
         try {
-            await login(credentials)
-            navigate('/')
-        } catch (error) {
-            setError(`Error al iniciar Sesión. Verifica tus credenciales. ERROR: ${error}`)
+            await login({ correo: email, password });
+            navigate('/');
+        } catch (err) {
+            setError(err.message);
         }
     }
 
-
+    const handleGoogleLogin = async () => {
+        try {
+            await loginWithGoogle();
+            navigate('/');
+        } catch (err) {
+            setError(err.message);
+        }
+    }
 
     return (
-      <form className="form flex-center" onSubmit={handleSubmit}>
-        <div className="form__group">
-          <label htmlFor="email">Correo Electronico</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Por favor Ingresa tu email"
-            value={credentials.email}
-            onChange={handleChange}
-            required
-          />
+        <div>
+            <h2>Iniciar Sesión</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <form onSubmit={handleLogin}>
+                <div>
+                    <label>Email:</label>
+                    <input 
+                        type="email" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                        required 
+                    />
+                </div>
+                <div>
+                    <label>Contraseña:</label>
+                    <input 
+                        type="password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required 
+                    />
+                </div>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+            <button onClick={handleGoogleLogin}>Iniciar Sesión con Google</button>
         </div>
-        <div className="form__group">
-          <label htmlFor="password">Contraseña</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Por favor Ingresa tu constrasela"
-            value={credentials.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        {error && <p className="form-error">{error}</p>}
-        <button type="submit" className="button login-button">
-          Iniciar Sesión
-        </button>
-      </form>
     );
-
 }
+

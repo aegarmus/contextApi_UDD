@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "https://reqres.in/api";
+const API_URL = "http://localhost:3000/api/v1";
 
 
 const apiCLient = axios.create({
@@ -21,7 +21,7 @@ apiCLient.interceptors.request.use(
 
 export const registerUser = async(userData) => {
     try {
-        const { data } = await apiCLient.post('/register', userData)
+        const { data } = await apiCLient.post('/auth', userData)
         return data //Devuelve el id y token
     } catch (error) {
         throw new Error(`No pudimos registrar al usuario. ${error}`)
@@ -42,8 +42,8 @@ export const registerUser = async(userData) => {
 
 export const authenticate = async(credentials) => {
     try {
-        const { data } = await apiCLient.post('/login', credentials)
-        return data //Vuelve solo el token
+        const { data } = await apiCLient.post('/auth/login', credentials)
+        return data //Vuelve solo el token y datos del usuario
     } catch (error) {
         throw new Error(`Credenciales Invalidas. ${error}`);
     }

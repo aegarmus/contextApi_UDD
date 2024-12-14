@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { CartContext } from "../../context/Cart/cartContext"
 import { CartItem } from "./CartItem"
+import { formatPriceCLP } from "../../utils/formatPrice"
 
 
 export const CartList = () => {
@@ -15,7 +16,7 @@ export const CartList = () => {
         )
     }
 
-    const total = cart.reduce((accum, product) => accum + product.price * product.quantity, 0)
+    const total = cart.reduce((accum, product) => accum + product.precio * product.quantity, 0)
 
 
     return (
@@ -23,12 +24,12 @@ export const CartList = () => {
             <h2>Tu Carrito</h2>
             {
                 cart.map((product) => (
-                    <CartItem product={product} key={product.id} />
+                    <CartItem product={product} key={product._id} />
                 ))
             }
 
             <div className="cart-total">
-                <h3>Total: ${total.toFixed(2)}</h3>
+                <h3>Total: {formatPriceCLP(total)}</h3>
                 <button className="button button-clear" onClick={clearCart}>Vaciar Carrito</button>
             </div>
         </div>
